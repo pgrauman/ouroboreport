@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pyreport"
+version = "0.1.0"
+description = "Simple framework for generating reports in python"
+authors = ["PGrauman"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+# pandas = "^1.2.2"
+# pypandoc = "^1.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

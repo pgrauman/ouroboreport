@@ -1,0 +1,4 @@
+# ignore transient .directories
+.venv/
+.pytest_cache/
+**__pycache__**
