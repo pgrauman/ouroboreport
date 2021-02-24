@@ -6,9 +6,9 @@ authors = ["PGrauman"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-# pandas = "^1.2.2"
-# pypandoc = "^1.5"
+python = "^3.8"
+pandas = "^1.2.2"
+pypandoc = "^1.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.4"
