@@ -2,7 +2,7 @@
 name = "ouroboreport"
 version = "0.1.0"
 description = "Simple framework for generating reports in python"
-authors = ["PGrauman"]
+authors = ["pgrauman"]
 license = "MIT"
 
 [tool.poetry.dependencies]
