@@ -1,12 +1,12 @@
 import pytest
 
 from pathlib import Path
-from pyreport.components import Header
-from pyreport.components import Paragraph
-from pyreport.components import UnorderedList
-from pyreport.components import OrderedList
-from pyreport.components import CheckboxList
-from pyreport.components import Plot
+from ouroboreport.components import Header
+from ouroboreport.components import Paragraph
+from ouroboreport.components import UnorderedList
+from ouroboreport.components import OrderedList
+from ouroboreport.components import CheckboxList
+from ouroboreport.components import Plot
 
 @pytest.fixture
 def header(request):

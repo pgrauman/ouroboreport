@@ -10,8 +10,8 @@ from shutil import copyfile
 import pypandoc
 
 from atlassian import Confluence
-from pyreport.components import Plot
-from pyreport.shared import ifnotexistmkdir
+from ouroboreport.components import Plot
+from ouroboreport.shared import ifnotexistmkdir
 
 
 

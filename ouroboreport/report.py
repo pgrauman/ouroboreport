@@ -2,16 +2,16 @@
 """
 from datetime import datetime
 from pathlib import Path
-from pyreport.renderers import ConfluenceRenderer
-from pyreport.renderers import MarkdownRenderer
-from pyreport.renderers import HTMLRenderer
-from pyreport.renderers import PDFRenderer
-from pyreport.components import Header
-from pyreport.components import Paragraph
-from pyreport.components import UnorderedList
-from pyreport.components import OrderedList
-from pyreport.components import CheckboxList
-from pyreport.components import Plot
+from ouroboreport.renderers import ConfluenceRenderer
+from ouroboreport.renderers import MarkdownRenderer
+from ouroboreport.renderers import HTMLRenderer
+from ouroboreport.renderers import PDFRenderer
+from ouroboreport.components import Header
+from ouroboreport.components import Paragraph
+from ouroboreport.components import UnorderedList
+from ouroboreport.components import OrderedList
+from ouroboreport.components import CheckboxList
+from ouroboreport.components import Plot
 
 
 DEFAULT_TITLE = "Ouroboreport"

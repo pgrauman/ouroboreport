@@ -4,7 +4,7 @@ env-install:
 	test -d .venv || poetry install
 
 lint: env-install
-	poetry run pylint pyreport
+	poetry run pylint ouroboreport
 
 test: env-install
 	poetry run pytest tests

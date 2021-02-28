@@ -1,6 +1,6 @@
 import os
 
-from pyreport.shared import ifnotexistmkdir
+from ouroboreport.shared import ifnotexistmkdir
 
 
 def test_ifnotexistmkdir(tmpdir):

@@ -2,10 +2,10 @@ import os
 import pytest
 
 from pathlib import Path
-from pyreport.components import Plot
-from pyreport.renderers import ConfluenceRenderer
-from pyreport.renderers import MarkdownRenderer
-from pyreport.renderers import HTMLRenderer
+from ouroboreport.components import Plot
+from ouroboreport.renderers import ConfluenceRenderer
+from ouroboreport.renderers import MarkdownRenderer
+from ouroboreport.renderers import HTMLRenderer
 
 
 class FakeComponent():

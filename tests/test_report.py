@@ -1,11 +1,11 @@
 import pandas as pd
 import pytest
 
-from pyreport.report import Report
-from pyreport.report import Header
-from pyreport.report import Paragraph
-from pyreport.report import UnorderedList
-from pyreport.report import OrderedList
+from ouroboreport.report import Report
+from ouroboreport.report import Header
+from ouroboreport.report import Paragraph
+from ouroboreport.report import UnorderedList
+from ouroboreport.report import OrderedList
 
 @pytest.fixture
 def report():
