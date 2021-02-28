@@ -86,11 +86,12 @@ class PDFRenderer():
         with tempfile.TemporaryDirectory() as tmpdirname:
             filepath = f"{tmpdirname}/temp.md"
             MarkdownRenderer().save(report, filepath)
-            pypandoc.convert_file(filepath, "pdf", outputfile=dest)
+            print(filepath, dest)
+            pypandoc.convert_file(filepath, "pdf", outputfile=str(dest))
 
 
-class ConfluenceAPIError(Exception):
-    pass
+# class ConfluenceAPIError(Exception):
+#     pass
 
 
 class ConfluenceRenderer(MarkdownRenderer):
@@ -101,7 +102,7 @@ class ConfluenceRenderer(MarkdownRenderer):
         self.space = space
 
         # if not all([space, url, username, token]):
-        #     raise ConfluenceAPIError("Must assigne a space, url, unername and token") 
+        #     raise ConfluenceAPIError("Must assigne a space, url, unername and token")
 
         # Define atlassian api connection
         self.conn = Confluence(url=url, username=username,
@@ -120,10 +121,42 @@ class ConfluenceRenderer(MarkdownRenderer):
     def save(self, report):
         """Save report to Confluence
         """
-        # report must have title, check that it's unique?
-
+        report, plots_to_upload = self._process_images(report)
         content = self._convert_to_jira_wiki(report)
-        self.conn.create_page(self.space, report.title, content, type="page", representation="wiki")
+        response = self.conn.create_page(self.space, report.title, content, type="page",
+                                         representation="wiki", parent_id=self.parent)
+        page_id = response['id']
+
+        # upload images
+        for filepath, name in plots_to_upload:
+            self._upload_image(filepath, name, page_id)
+
+    def _process_images(self, report):
+        """Prepare report and images to be uploaded
+        """
+        out_report = deepcopy(report)
+        out_report.components = []
+        images_to_upload = []
+        for component in report.get_components():
+            if isinstance(component, Plot):
+                # prepare upload
+                filepath = component.get_path()
+                name = os.path.basename(filepath)
+                images_to_upload.append((filepath, name))
+
+                # Change Plot to match
+                new_plot = deepcopy(component)
+                new_plot.set_path(name)
+                out_report.add_component(new_plot)
+            else:
+                out_report.add_component(component)
+        return out_report, images_to_upload
+
+
+    def _upload_image(self, filepath, name, page_id):
+        """Upload Iamges to Confluence
+        """
+        self.conn.attach_file(filepath, space=self.space, page_id=page_id, name=name)
 
     def _test_connection(self):
         """Test initialized confluence connection
@@ -133,8 +166,9 @@ class ConfluenceRenderer(MarkdownRenderer):
         """Test initialized confluence connection
         """
 
-
     def _convert_to_jira_wiki(self, report):
+        """Convert Markdown content to Atlassian wiki markup
+        """
         content = self._render_markdown(report.get_components())
         content = pypandoc.convert_text(content, "jira", "markdown")
         return content

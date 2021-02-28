@@ -41,21 +41,23 @@ def test_html_renderer(tmpdir, report):
     assert p.read() == expected
 
 
-def test_conlfluence_renderer_to_jira(report):
-    renderer = ConfluenceRenderer()
-    content = renderer._convert_to_jira_wiki(report)
-    expected = "h1. {anchor:test}TEST\nh1. {anchor:test-1}TEST\n"
-    assert content == expected
-
 def test_confluence_set_parent():
     renderer = ConfluenceRenderer()
     renderer.set_parent("test")
     assert renderer.parent == "test"
 
+
 def test_confluence_set_space():
     renderer = ConfluenceRenderer()
     renderer.set_space("TEST")
     assert renderer.space == "TEST"
+
+
+def test_conlfluence_renderer_to_jira(report):
+    renderer = ConfluenceRenderer()
+    content = renderer._convert_to_jira_wiki(report)
+    expected = "h1. {anchor:test}TEST\nh1. {anchor:test-1}TEST\n"
+    assert content == expected
 
 
 # Not ideal but inherit Plot object and fake methods used by test
@@ -69,6 +71,26 @@ class FakePlot(Plot):
 
     def set_path(self, filepath):
         self.filepath = Path(filepath)
+
+
+def test_confluence_process_images(tmpdir):
+    # setup
+    renderer = ConfluenceRenderer()
+    src_plot_path = Path(f"{tmpdir}/plot.png")
+    plot = FakePlot(src_plot_path)
+    report = FakeReport([plot, FakeComponent()])
+
+    # Process
+    new_report, images_to_upload = renderer._process_images(report)
+
+    # Check plot handling
+    exepected_plot = Path("plot.png")
+    assert new_report.components[0].get_path() == exepected_plot
+    assert images_to_upload[0][0] == src_plot_path
+    assert images_to_upload[0][1] == str(exepected_plot)
+
+    # Check non-plot handling
+    assert new_report.components[1].to_markdown() == "# TEST"
 
 
 def test_html_renderer_move_plots(tmpdir):

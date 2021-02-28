@@ -78,7 +78,7 @@ def test_unordered_list_html(ul):
 
 
 def test_unordered_list_markdown(ul):
-    list_string = "* item1\n* item2"
+    list_string = "* item1\n* item2\n"
     assert ul.to_markdown() == list_string
 
 
@@ -88,7 +88,7 @@ def test_ordered_list_html(ol):
 
 
 def test_checkbox_list_to_mardown(cbl):
-    list_string = "- [ ] item1\n- [ ] item2"
+    list_string = "- [ ] item1\n- [ ] item2\n"
     assert cbl.to_markdown() == list_string
 
 
@@ -109,7 +109,7 @@ def test_plot_get_path(plot):
 
 
 def test_plot_to_markdown(plot):
-    expected = '[alt](test.png "title")'
+    expected = '![alt](test.png "title")'
     assert plot.to_markdown() == expected
 
 

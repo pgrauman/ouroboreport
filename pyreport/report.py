@@ -25,8 +25,8 @@ class Report():
         self.author = author
 
         if not title:
-            dt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            title = f"{dt} - {DEFAULT_TITLE}"
+            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            title = f"{now} - {DEFAULT_TITLE}"
 
         self.title = title
 
@@ -119,7 +119,7 @@ class Report():
         renderer = PDFRenderer()
         renderer.save(self, destination)
 
-    def save_to_confluence(self, space=None, url=None, username=None, token=None, parent=None):
+    def save_confluence(self, space=None, url=None, username=None, token=None, parent=None):
         """Save Report to to_confluence format
         """
         renderer = ConfluenceRenderer(space=space, url=url, username=username,

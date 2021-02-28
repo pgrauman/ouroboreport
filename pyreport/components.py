@@ -99,7 +99,7 @@ class UnorderedList(Component):
     def to_markdown(self):
         """Convert content to markdown format
         """
-        return "\n".join([f"{self.md_prefix}{str(c)}" for c in self.content])
+        return "\n".join([f"{self.md_prefix}{str(c)}" for c in self.content]) + "\n"
 
 
 class OrderedList(UnorderedList):
@@ -110,7 +110,7 @@ class OrderedList(UnorderedList):
     def to_markdown(self):
         """Convert content to markdown format
         """
-        return "\n".join([f"{i+1}. {str(c)}" for i, c in enumerate(self.content)])
+        return "\n".join([f"{i+1}. {str(c)}" for i, c in enumerate(self.content)]) + "\n"
 
 
 class CheckboxList(UnorderedList):
@@ -150,4 +150,4 @@ class Plot(Component):
     def to_markdown(self):
         """Convert content to markdown format
         """
-        return f'[{self.alttxt}]({self.filepath} "{self.title}")'
+        return f'![{self.alttxt}]({self.filepath} "{self.title}")'

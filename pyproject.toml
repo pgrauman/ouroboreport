@@ -15,6 +15,7 @@ tabulate = "*"
 [tool.poetry.dev-dependencies]
 pytest = "^3.4"
 pylint = "*"
+seaborn = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

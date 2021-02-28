@@ -8,3 +8,6 @@
 
 # ignore local directory
 local/
+
+# Other garbage files
+.DS_Store
