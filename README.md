@@ -1,5 +1,3 @@
-# README.md
-
 # Ouroboreport
 
 Ouroboreport is a package for writing simple reports in line with your analysis code, then publishing it to whatever format you need. Adding content to the report is simple and the details of typesetting and format conversion is done for you.
